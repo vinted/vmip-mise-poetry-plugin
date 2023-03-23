@@ -40,7 +40,7 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@master
 
       - name: Install rtx
-        uses: brew install rtx
+        run: brew install rtx
 
       - name: Install bats-core
         run: brew install bats-core
