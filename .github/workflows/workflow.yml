@@ -47,6 +47,7 @@ jobs:
 
       - name: Test plugin
         run: |
+          mkdir -p ~/.local/share/rtx/plugins
           ln -s $PWD ~/.local/share/rtx/plugins/poetry
           make test
         env:
