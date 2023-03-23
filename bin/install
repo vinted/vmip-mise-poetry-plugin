@@ -5,63 +5,63 @@ set -Eeuo pipefail
 trap cleanup SIGINT SIGTERM ERR
 
 cleanup() {
-  trap - SIGINT SIGTERM ERR
-  rm -rf "$ASDF_INSTALL_PATH"
-  echo
-  echo "Cleanup: Something went wrong!"
-  echo
-  echo "$(caller): ${BASH_COMMAND}"
+	trap - SIGINT SIGTERM ERR
+	rm -rf "$RTX_INSTALL_PATH"
+	echo
+	echo "Cleanup: Something went wrong!"
+	echo
+	echo "$(caller): ${BASH_COMMAND}"
 }
 
 semver_ge() {
-  printf '%s\n%s\n' "$2" "$1" | sort --check=quiet --version-sort
+	printf '%s\n%s\n' "$2" "$1" | sort --check=quiet --version-sort
 }
 
 install_poetry() {
-  local install_type=$1
-  local version=$2
-  local install_path=$3
-  local flags=
+	local install_type=$1
+	local version=$2
+	local install_path=$3
+	local flags=
 
-  if [ "$install_type" == "version" ]; then
-    semver_ge "$ASDF_INSTALL_VERSION" 1.1.7 && install_vercomp="ge" || install_vercomp="lt"
-    semver_ge "$ASDF_INSTALL_VERSION" 1.2.0 && config_vercomp="ge" || config_vercomp="lt"
-  else
-    install_vercomp="ge"
-    config_vercomp="lt"
-  fi
+	if [ "$install_type" == "version" ]; then
+		semver_ge "$RTX_INSTALL_VERSION" 1.1.7 && install_vercomp="ge" || install_vercomp="lt"
+		semver_ge "$RTX_INSTALL_VERSION" 1.2.0 && config_vercomp="ge" || config_vercomp="lt"
+	else
+		install_vercomp="ge"
+		config_vercomp="lt"
+	fi
 
-  if [[ -n ${ASDF_POETRY_INSTALL_URL:-} ]]; then
-    install_url=$ASDF_POETRY_INSTALL_URL
-  elif [ $install_vercomp == "ge" ]; then
-    install_url="https://install.python-poetry.org"
-  else
-    install_url="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
-  fi
+	if [[ -n ${RTX_POETRY_INSTALL_URL:-} ]]; then
+		install_url=$RTX_POETRY_INSTALL_URL
+	elif [ $install_vercomp == "ge" ]; then
+		install_url="https://install.python-poetry.org"
+	else
+		install_url="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
+	fi
 
-  if [[ $install_url == *get-poetry* ]]; then
-    flags=--no-modify-path
-  fi
+	if [[ $install_url == *get-poetry* ]]; then
+		flags=--no-modify-path
+	fi
 
-  if [ "$install_type" = "version" ]; then
-    curl -sSL "$install_url" | POETRY_HOME=$install_path python3 - --version "$version" $flags
-  elif [ "$install_type" = "ref" ]; then
-    curl -sSL "$install_url" | POETRY_HOME=$install_path python3 - --git https://github.com/python-poetry/poetry.git@"$version" $flags
-  else
-    fail "unknown install type"
-  fi
+	if [ "$install_type" = "version" ]; then
+		curl -sSL "$install_url" | POETRY_HOME=$install_path python3 - --version "$version" $flags
+	elif [ "$install_type" = "ref" ]; then
+		curl -sSL "$install_url" | POETRY_HOME=$install_path python3 - --git https://github.com/python-poetry/poetry.git@"$version" $flags
+	else
+		fail "unknown install type"
+	fi
 
-  if [ $config_vercomp == "ge" ]; then
-    # Ensure that poetry behaves as expected with asdf python (pyenv)
-    echo Configuring poetry to behave properly with asdf ...
-    echo Running: \"poetry config virtualenvs.prefer-active-python true\".
-    echo ""
-    "$install_path"/bin/poetry config virtualenvs.prefer-active-python true
-  else
-    echo Warning: Poetry versions prior to 1.2.0 may not work properly with asdf.
-    echo Consider upgrading to a later version.
-    echo https://github.com/asdf-community/asdf-poetry/issues/10
-  fi
+	if [ $config_vercomp == "ge" ]; then
+		# Ensure that poetry behaves as expected with rtx python (pyenv)
+		echo Configuring poetry to behave properly with rtx ...
+		echo Running: \"poetry config virtualenvs.prefer-active-python true\".
+		echo ""
+		"$install_path"/bin/poetry config virtualenvs.prefer-active-python true
+	else
+		echo Warning: Poetry versions prior to 1.2.0 may not work properly with rtx.
+		echo Consider upgrading to a later version.
+		echo https://github.com/asdf-community/asdf-poetry/issues/10
+	fi
 }
 
 install_poetry "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
