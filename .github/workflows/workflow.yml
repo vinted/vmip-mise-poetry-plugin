@@ -47,7 +47,7 @@ jobs:
 
       - name: Test plugin
         run: |
-          rtx plugin add poetry $GITHUB_WORKSPACE
+          ln -s $PWD ~/.local/share/rtx/plugins/poetry
           make test
         env:
           GITHUB_API_TOKEN: ${{ github.token }}
