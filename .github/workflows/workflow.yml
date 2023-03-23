@@ -24,7 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: mkdir -p ~/.local/share/rtx/plugins
-      - run: ln -s $PWD ~/.local/share/rtx/plugins/python
+      - run: ln -s $PWD ~/.local/share/rtx/plugins/poetry
       - run: rtx i poetry@latest
       - run: rtx x poetry@latest -- poetry --version
 
