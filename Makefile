@@ -12,7 +12,3 @@ fmt-check:
 lint:
 	shellcheck $(SH_SRCFILES)
 .PHONY: lint
-
-test:
-	bats test
-.PHONY: test
