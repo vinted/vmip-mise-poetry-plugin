@@ -33,7 +33,7 @@ install_poetry() {
 
 	if [[ -n ${RTX_POETRY_INSTALL_URL:-} ]]; then
 		install_url=$RTX_POETRY_INSTALL_URL
-	elif [ $install_vercomp == "ge" ]; then
+	elif [ "$install_vercomp" == "ge" ]; then
 		install_url="https://install.python-poetry.org"
 	else
 		install_url="https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
@@ -51,7 +51,7 @@ install_poetry() {
 		fail "unknown install type"
 	fi
 
-	if [ $config_vercomp == "ge" ]; then
+	if [ "$config_vercomp" == "ge" ]; then
 		# Ensure that poetry behaves as expected with rtx python (pyenv)
 		echo Configuring poetry to behave properly with rtx ...
 		echo Running: \"poetry config virtualenvs.prefer-active-python true\".
