@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# shellcheck source-path=.
+source "$RTX_PLUGIN_PATH/bin/utils.sh"
+
+setup_poetry() {
+  VIRTUAL_ENV=$(poetry_venv)
+  if [[ -z $VIRTUAL_ENV || ! -d $VIRTUAL_ENV ]]; then
+    "$(poetry_bin)" install
+    VIRTUAL_ENV=$("$(poetry_bin)" env info -p)
+  fi
+  POETRY_ACTIVE=1
+  export VIRTUAL_ENV POETRY_ACTIVE
+}
+
+setup_poetry

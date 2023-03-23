@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "rtx-poetry"
+version = "0.1.0"
+description = ""
+authors = ["Jeff Dickey <216188+jdxcode@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "rtx_poetry"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
