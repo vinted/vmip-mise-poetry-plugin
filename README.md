@@ -34,6 +34,17 @@ RTX_POETRY_INSTALL_URL=https://install.python-poetry.org rtx install poetry 1.1.
 Doing so is not recommended and may result in poetry installations which
 disregard the `rtx-python` plugin. See [issue #10](https://github.com/rtx-plugins/rtx-poetry/issues/10).
 
+## Virtualenv Activation
+
+Automatically activate the poetry virtualenv when entering the directory with the following
+`.rtx.toml`:
+
+```toml
+[tools]
+poetry = {version='latest', pyproject='pyproject.toml'}
+python = '3.11' # must be after poetry so the poetry bin is first in PATH
+```
+
 ## License
 
 Licensed under the
