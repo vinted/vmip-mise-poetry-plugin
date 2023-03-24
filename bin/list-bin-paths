@@ -9,5 +9,5 @@ VIRTUAL_ENV="$(poetry_venv)"
 if [ -z "$VIRTUAL_ENV" ]; then
   echo "bin"
 else
-  echo "bin $VIRTUAL_ENV/bin"
+  echo "$VIRTUAL_ENV/bin bin"
 fi
