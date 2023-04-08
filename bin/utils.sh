@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echoerr() {
-  printf "\033[0;31m%s\033[0m" "$1" >&2
+  echo "$1" >&2
 }
 
 poetry_bin() {
@@ -18,7 +18,7 @@ poetry_venv() {
     pyproject="${RTX_PROJECT_ROOT-}/$pyproject"
   fi
   if [[ ! -f $pyproject ]]; then
-    echoerr "rtx-python: no pyproject.toml found at $pyproject"
+    echoerr "rtx-poetry: no pyproject.toml found at $pyproject"
     exit 1
   fi
   "$(poetry_bin)" env info -p 2>/dev/null
