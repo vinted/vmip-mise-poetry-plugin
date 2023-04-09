@@ -7,7 +7,7 @@ source "$RTX_PLUGIN_PATH/bin/utils.sh"
 
 VIRTUAL_ENV="$(poetry_venv)"
 if [ -z "$VIRTUAL_ENV" ]; then
-	echo "bin"
+  echo "bin"
 else
-	echo "$VIRTUAL_ENV/bin bin"
+  echo "$VIRTUAL_ENV/bin bin"
 fi
