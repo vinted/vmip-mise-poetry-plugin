@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [ "${RTX_TRACE:-}" = "1" ]; then
+  set -x
+fi
+
 echoerr() {
   echo "$1" >&2
 }
@@ -14,12 +18,12 @@ poetry_venv() {
   if [ "$pyproject" = "" ]; then
     return
   fi
-  if [[ $pyproject != /* ]] && [[ -n ${RTX_PROJECT_ROOT-} ]]; then
+  if [[ "$pyproject" != /* ]] && [[ -n "${RTX_PROJECT_ROOT-}" ]]; then
     pyproject="${RTX_PROJECT_ROOT-}/$pyproject"
   fi
-  if [[ ! -f $pyproject ]]; then
-    echoerr "rtx-poetry: no pyproject.toml found at $pyproject"
-    exit 1
+  if [[ ! -f "$pyproject" ]]; then
+    echoerr "rtx-poetry: No pyproject.toml found. Executing \`poetry init\` to create \`$pyproject\` first."
+    poetry init
   fi
-  "$(poetry_bin)" env info -p 2>/dev/null
+  "$(poetry_bin)" env info --path 2>/dev/null; true
 }
