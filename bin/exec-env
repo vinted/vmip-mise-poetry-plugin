@@ -7,7 +7,7 @@ source "$RTX_PLUGIN_PATH/bin/utils.sh"
 
 VIRTUAL_ENV="$(poetry_venv)"
 if [[ -z $VIRTUAL_ENV || ! -d $VIRTUAL_ENV ]]; then
-  echoerr 'rtx-poetry: No virtualenv exists. Executing `poetry install` to create one.'
+  echoerr "rtx-poetry: No virtualenv exists. Executing \`poetry install\` to create one."
   "$(poetry_bin)" install
   VIRTUAL_ENV="$("$(poetry_bin)" env info --path)"
 fi
