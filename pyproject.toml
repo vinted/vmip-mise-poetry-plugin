@@ -4,11 +4,11 @@ version = "0.1.0"
 description = ""
 authors = ["Jeff Dickey <216188+jdxcode@users.noreply.github.com>"]
 readme = "README.md"
-packages = [{include = "rtx_poetry"}]
+packages = [{include = "poetry_demo"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-
+pendulum = "^2.1"
 
 [build-system]
 requires = ["poetry-core"]
