@@ -22,8 +22,8 @@ poetry_venv() {
     pyproject="${RTX_PROJECT_ROOT-}/$pyproject"
   fi
   if [[ ! -f $pyproject ]]; then
-    echoerr "rtx-poetry: No pyproject.toml found. Executing \`poetry init\` to create \`$pyproject\` first."
-    poetry init
+    echoerr "rtx-poetry: No pyproject.toml found. Execute \`poetry init\` to create \`$pyproject\` first."
+    return
   fi
   "$(poetry_bin)" env info --path 2>/dev/null
   true
