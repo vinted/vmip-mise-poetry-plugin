@@ -18,7 +18,8 @@ setup_virtualenv() {
   fi
 
   POETRY_ACTIVE=1
-  export VIRTUAL_ENV POETRY_ACTIVE
+  RTX_ADD_PATH="$VIRTUAL_ENV/bin"
+  export VIRTUAL_ENV POETRY_ACTIVE RTX_ADD_PATH
 }
 
 setup_virtualenv
