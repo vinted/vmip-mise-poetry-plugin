@@ -20,7 +20,7 @@ install & manage versions.
 
 ### Overriding installer
 
-`RTX_POETRY_INSTALL_URL` is an optional variable you can specific to point to
+`MISE_POETRY_INSTALL_URL` is an optional variable you can specific to point to
 the hosted installer of your choosing, e.g. `get-poetry.py` or the new `install-poetry.py`
 (compatible with [1.1.7+](https://github.com/python-poetry/poetry/releases/tag/1.1.7) and
 [default in 1.2](https://python-poetry.org/blog/announcing-poetry-1.2.0a1/#deprecation-of-the-get-poetrypy-script)).
@@ -28,7 +28,7 @@ the hosted installer of your choosing, e.g. `get-poetry.py` or the new `install-
 For example, to force `install-poetry.py` on 1.1.9:
 
 ```
-RTX_POETRY_INSTALL_URL=https://install.python-poetry.org rtx install poetry 1.1.9
+MISE_POETRY_INSTALL_URL=https://install.python-poetry.org rtx install poetry 1.1.9
 ```
 
 Doing so is not recommended and may result in poetry installations which

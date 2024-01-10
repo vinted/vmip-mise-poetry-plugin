@@ -6,7 +6,7 @@ trap cleanup SIGINT SIGTERM ERR
 
 cleanup() {
   trap - SIGINT SIGTERM ERR
-  rm -rf "$RTX_INSTALL_PATH"
+  rm -rf "$MISE_INSTALL_PATH"
   echo
   echo "Cleanup: Something went wrong!"
   echo
@@ -24,15 +24,15 @@ install_poetry() {
   local flags=
 
   if [ "$install_type" == "version" ]; then
-    semver_ge "$RTX_INSTALL_VERSION" 1.1.7 && install_vercomp="ge" || install_vercomp="lt"
-    semver_ge "$RTX_INSTALL_VERSION" 1.2.0 && config_vercomp="ge" || config_vercomp="lt"
+    semver_ge "$MISE_INSTALL_VERSION" 1.1.7 && install_vercomp="ge" || install_vercomp="lt"
+    semver_ge "$MISE_INSTALL_VERSION" 1.2.0 && config_vercomp="ge" || config_vercomp="lt"
   else
     install_vercomp="ge"
     config_vercomp="lt"
   fi
 
-  if [[ -n ${RTX_POETRY_INSTALL_URL-} ]]; then
-    install_url=$RTX_POETRY_INSTALL_URL
+  if [[ -n ${MISE_POETRY_INSTALL_URL-} ]]; then
+    install_url=$MISE_POETRY_INSTALL_URL
   elif [ "$install_vercomp" == "ge" ]; then
     install_url="https://install.python-poetry.org"
   else

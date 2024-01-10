@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # shellcheck source-path=.
-source "$RTX_PLUGIN_PATH/bin/utils.sh"
+source "$MISE_PLUGIN_PATH/bin/utils.sh"
 
 setup_virtualenv() {
   VIRTUAL_ENV="$(poetry_venv)"
@@ -18,8 +18,8 @@ setup_virtualenv() {
   fi
 
   POETRY_ACTIVE=1
-  RTX_ADD_PATH="$VIRTUAL_ENV/bin"
-  export VIRTUAL_ENV POETRY_ACTIVE RTX_ADD_PATH
+  MISE_ADD_PATH="$VIRTUAL_ENV/bin"
+  export VIRTUAL_ENV POETRY_ACTIVE MISE_ADD_PATH
 }
 
 setup_virtualenv
