@@ -1,4 +1,4 @@
-#:schema https://rtx.pub/schema/rtx.plugin.json
+#:schema https://mise.jdx.dev/schema/mise.plugin.json
 
 [exec-env]
 cache-key = [

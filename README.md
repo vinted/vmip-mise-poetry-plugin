@@ -1,21 +1,21 @@
-# rtx-poetry
+# mise-poetry
 
-[Poetry](https://github.com/python-poetry/poetry) plugin for rtx version
+[Poetry](https://github.com/python-poetry/poetry) plugin for mise version
 manager
 
 ## Build History
 
-[![Build history](https://buildstats.info/github/chart/rtx-plugins/rtx-poetry?branch=main)](https://github.com/rtx-plugins/rtx-poetry/actions)
+[![Build history](https://buildstats.info/github/chart/mise-plugins/mise-poetry?branch=main)](https://github.com/mise-plugins/mise-poetry/actions)
 
 ## Installation
 
 ```bash
-rtx plugin add poetry
+mise plugin add poetry
 ```
 
 ## Usage
 
-Check [rtx](https://github.com/jdxcode/rtx) readme for instructions on how to
+Check [mise](https://github.com/jdx/mise) readme for instructions on how to
 install & manage versions.
 
 ### Overriding installer
@@ -28,16 +28,16 @@ the hosted installer of your choosing, e.g. `get-poetry.py` or the new `install-
 For example, to force `install-poetry.py` on 1.1.9:
 
 ```
-MISE_POETRY_INSTALL_URL=https://install.python-poetry.org rtx install poetry 1.1.9
+MISE_POETRY_INSTALL_URL=https://install.python-poetry.org mise install poetry 1.1.9
 ```
 
 Doing so is not recommended and may result in poetry installations which
-disregard the `rtx-python` plugin. See [issue #10](https://github.com/rtx-plugins/rtx-poetry/issues/10).
+disregard the `mise-python` plugin. See [issue #10](https://github.com/mise-plugins/mise-poetry/issues/10).
 
 ## Virtualenv Activation
 
 Automatically activate the poetry virtualenv when entering the directory with the following
-`.rtx.toml`:
+`.mise.toml`:
 
 ```toml
 [tools]
@@ -48,4 +48,4 @@ python = '3.11' # must be after poetry so the poetry bin is first in PATH
 ## License
 
 Licensed under the
-[MIT license](https://github.com/rtx-plugins/rtx-poetry/blob/main/LICENSE).
+[MIT license](https://github.com/mise-plugins/mise-poetry/blob/main/LICENSE).

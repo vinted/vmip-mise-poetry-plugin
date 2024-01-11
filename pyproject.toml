@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "rtx-poetry"
+name = "mise-poetry"
 version = "0.1.0"
 description = ""
 authors = ["Jeff Dickey <216188+jdxcode@users.noreply.github.com>"]

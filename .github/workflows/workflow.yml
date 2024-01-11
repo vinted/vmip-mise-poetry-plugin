@@ -20,13 +20,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: jdxcode/rtx-action@v1
+      - uses: jdxcode/mise-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: mkdir -p ~/.local/share/rtx/plugins
-      - run: ln -s $PWD ~/.local/share/rtx/plugins/poetry
-      - run: rtx i poetry@latest
-      - run: rtx x poetry@latest -- poetry --version
+      - run: mkdir -p ~/.local/share/mise/plugins
+      - run: ln -s $PWD ~/.local/share/mise/plugins/poetry
+      - run: mise i poetry@latest
+      - run: mise x poetry@latest -- poetry --version
 
   lint:
     runs-on: ubuntu-latest
