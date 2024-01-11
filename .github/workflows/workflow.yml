@@ -23,6 +23,8 @@ jobs:
       - uses: jdx/mise-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          cache: false
       - run: mkdir -p ~/.local/share/mise/plugins
       - run: ln -s $PWD ~/.local/share/mise/plugins/poetry
       - run: mise i poetry@latest
