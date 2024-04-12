@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -Eeo pipefail
+
+uninstall_poetry() {
+  local version=$1
+
+  if [[ "$1" == "" ]]; then
+    echo "Please provide the version you want to uninstall!"
+    exit 1
+  fi
+
+  export POETRY_CONFIG_DIR="$HOME/Library/Application Support/pypoetry/$version"
+  rm -rf "$POETRY_CONFIG_DIR"
+  
+  versions_installed=$(find "$HOME/Library/Application Support/pypoetry" -mindepth 1 -maxdepth 1 -type d | wc -l)
+  
+  if [[ "$versions_installed" -eq 0 ]]; then
+    rm -rf "$HOME/Library/Application Support/pypoetry/config.toml"
+  fi
+}
+
+uninstall_poetry "$MISE_INSTALL_VERSION"

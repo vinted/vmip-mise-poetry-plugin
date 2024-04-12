@@ -28,5 +28,5 @@ set -euo pipefail
 
 # setup_virtualenv
 
-export POETRY_HOME="$ASDF_INSTALL_PATH" \
-       POETRY_CONFIG_DIR="$HOME/Library/Application Support/pypoetry/$ASDF_INSTALL_VERSION"
+export POETRY_HOME="$MISE_INSTALL_PATH" \
+       POETRY_CONFIG_DIR="$HOME/Library/Application Support/pypoetry/$MISE_INSTALL_VERSION"

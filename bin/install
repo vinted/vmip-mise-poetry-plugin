@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -Eeuo pipefail
+set -Eeo pipefail
 
 trap cleanup SIGINT SIGTERM ERR
 
@@ -32,7 +32,7 @@ install_poetry() {
   export POETRY_CONFIG_DIR="$HOME/Library/Application Support/pypoetry/$version"
   export POETRY_HOME="$install_path"
 
-  if [ "$install_type" == "version" ]; then
+  if [[ "$install_type" == "version" ]]; then
     semver_ge "$MISE_INSTALL_VERSION" 1.7.0 && install_vercomp="ge" || install_vercomp="lt"
   else
     install_vercomp="ge"
@@ -40,15 +40,15 @@ install_poetry() {
 
   if [[ -n ${MISE_POETRY_INSTALL_URL:-} ]]; then
     install_url=$MISE_POETRY_INSTALL_URL
-  elif [ "$install_vercomp" == "ge" ]; then
+  elif [[ "$install_vercomp" == "ge" ]]; then
     install_url="https://install.python-poetry.org"
   else
     fail "Error: Please avoid using ancient Poetry versions prior to 1.7.0"
   fi
 
-  if [ "$install_type" = "version" ]; then
+  if [[ "$install_type" == "version" ]]; then
     curl -sSL "$install_url" | sed 's/symlinks=False/symlinks=True/' | python3 - --version "$version" $flags
-  elif [ "$install_type" = "ref" ]; then
+  elif [[ "$install_type" == "ref" ]]; then
     curl -sSL "$install_url" | sed 's/symlinks=False/symlinks=True/' | python3 - --git https://github.com/python-poetry/poetry.git@"$version" $flags
   else
     fail "Error: Unknown install type"
@@ -57,17 +57,17 @@ install_poetry() {
   # Ensure that Poetry behaves as expected with mise python (pyenv)
   "$install_path"/bin/poetry config virtualenvs.prefer-active-python true
   echo Adding the ML Platform configuration...
-  if [ ! -f "$POETRY_CONFIG_FILE" ]; then
+  if [[ ! -f "$POETRY_CONFIG_FILE" ]]; then
     "$install_path"/bin/poetry config virtualenvs.in-project true
 
     /bin/cp -rf "$POETRY_CONFIG_DIR/config.toml" "$POETRY_CONFIG_FILE"
   fi
   ln -Fs "$POETRY_CONFIG_FILE" "$POETRY_CONFIG_DIR/config.toml"
 
-  if [ -n "$MISE_TOOL_OPTS__PLUGINS" ]; then
+  if [[ -n "$MISE_TOOL_OPTS__PLUGINS" ]]; then
     "$install_path"/bin/poetry self add "poetry-dotenv-plugin@${MISE_TOOL_OPTS__DOTENV:-latest}"
     "$install_path"/bin/poetry self add "keyrings.google-artifactregistry-auth@${MISE_TOOL_OPTS__KEYRING:-latest}"
   fi
 }
 
-install_poetry "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
+install_poetry "$MISE_INSTALL_TYPE" "$MISE_INSTALL_VERSION" "$MISE_INSTALL_PATH"
