@@ -33,7 +33,7 @@ install_poetry() {
   export POETRY_HOME="$install_path"
 
   if [[ "$install_type" == "version" ]]; then
-    semver_ge "$MISE_INSTALL_VERSION" 1.7.0 && install_vercomp="ge" || install_vercomp="lt"
+    semver_ge "$MISE_INSTALL_VERSION" 1.4.0 && install_vercomp="ge" || install_vercomp="lt"
   else
     install_vercomp="ge"
   fi
@@ -43,7 +43,7 @@ install_poetry() {
   elif [[ "$install_vercomp" == "ge" ]]; then
     install_url="https://install.python-poetry.org"
   else
-    fail "Error: Please avoid using ancient Poetry versions prior to 1.7.0"
+    fail "Error: Please avoid using ancient Poetry versions prior to 1.4.0"
   fi
 
   if [[ "$install_type" == "version" ]]; then
